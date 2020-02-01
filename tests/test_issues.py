@@ -418,3 +418,12 @@ class Test(object):
         assert 4 == len(a[0])
         with pytest.raises(IOError):
             len(b[0])
+
+def test_issue447_tree_arrays_omitting_variables():
+    with uproot.open("tests/samples/issue447.root") as f:
+        print(f.keys())
+        t1 = f['l1CaloTowerEmuTree/L1CaloTowerTree']
+        arrays = t1.arrays()
+        n_array_vars = len(arrays.keys())
+        n_tree_vars = sum([len(t1[k].keys()) for k in t1.keys()])
+        assert n_tree_vars == n_array_vars
