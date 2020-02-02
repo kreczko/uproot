@@ -421,7 +421,6 @@ class Test(object):
 
 def test_issue447_tree_arrays_omitting_variables():
     with uproot.open("tests/samples/issue447.root") as f:
-        print(f.keys())
         t1 = f['l1CaloTowerEmuTree/L1CaloTowerTree']
         arrays = t1.arrays()
         n_array_vars = len(arrays.keys())
